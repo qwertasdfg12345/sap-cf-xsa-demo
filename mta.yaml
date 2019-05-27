@@ -2,3 +2,27 @@ ID: sap-cf-xsa-demo
 _schema-version: '2.1'
 description: SAP Cloud Foundry XSA Demo
 version: 0.0.1
+modules:
+  - name: db
+    type: hdb
+    path: db
+    requires:
+      - name: hdi_db
+  - name: core_xsjs
+    type: nodejs
+    path: core_xsjs
+    provides:
+      - name: core_xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_db
+      - name: db
+resources:
+  - name: hdi_db
+    parameters:
+      config:
+        schema: DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
