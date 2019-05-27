@@ -18,6 +18,24 @@ modules:
     requires:
       - name: hdi_db
       - name: db
+      - name: uaa_sap-cf-xsa-demo
+  - name: web
+    type: html5
+    path: web
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      builder: grunt
+    requires:
+      - name: uaa_sap-cf-xsa-demo
+      - name: dest_sap-cf-xsa-demo
+      - name: core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true
 resources:
   - name: hdi_db
     parameters:
@@ -26,3 +44,14 @@ resources:
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
+  - name: uaa_sap-cf-xsa-demo
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_sap-cf-xsa-demo
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service

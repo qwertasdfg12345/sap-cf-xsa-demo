@@ -1,0 +1,26 @@
+<mvc:View controllerName="ac.web.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Table id="idProductsTable" inset="false" items="{ path: '/POHeader', sorter: { path: 'PURCHASEORDERID' } }">
+							<columns>
+								<Column width="12em">
+									<Text text="PURCHASEORDERID"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier title="{PURCHASEORDERID}" text="{PURCHASEORDERID}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
